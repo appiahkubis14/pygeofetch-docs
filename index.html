@@ -29,14 +29,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:var(--nav-bg);bor
 .theme-toggle:hover{border-color:var(--border-strong);background:var(--bg-raised);}
 .version-badge{font-family:var(--mono);font-size:11px;padding:2px 8px;border-radius:10px;background:var(--green-dim);color:var(--green);border:1px solid var(--green-dim);}
 .docs-layout{display:flex;padding-top:56px;min-height:100vh;}
+.sidebar-toggle{display:none;width:34px;height:34px;border-radius:var(--radius-md);border:1px solid var(--border);background:var(--bg-surface);color:var(--text-primary);cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;margin-right:6px;}
+.sidebar-toggle:hover{background:var(--bg-raised);}
+.sidebar-backdrop{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,.4);z-index:190;opacity:0;transition:opacity .2s;}
+.sidebar-backdrop.open{display:block;opacity:1;}
 .sidebar{width:var(--sidebar-w);flex-shrink:0;position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;background:var(--bg-surface);border-right:1px solid var(--border);padding:20px 0;z-index:200;}
 .sidebar::-webkit-scrollbar{width:4px;}.sidebar::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px;}
-.sb-section{padding:0 16px;margin-bottom:20px;}
-.sb-title{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:6px;padding:0 4px;}
-.sb-link{display:block;font-size:13px;color:var(--text-secondary);padding:5px 8px;border-radius:var(--radius-sm);transition:all .12s;line-height:1.4;}
+.sb-section{padding:0 16px;margin-bottom:4px;}
+.sb-title{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:8px 4px;margin:0;background:none;border:none;width:100%;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;border-radius:var(--radius-sm);transition:color .15s,background .12s;}
+.sb-title:hover{color:var(--text-secondary);background:var(--bg-raised);}
+.sb-chevron{flex-shrink:0;transition:transform .2s ease;opacity:.7;}
+.sb-section.open .sb-chevron{transform:rotate(180deg);}
+.sb-links{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease;}
+.sb-section.open .sb-links{grid-template-rows:1fr;}
+.sb-links-inner{overflow:hidden;min-height:0;padding-top:2px;padding-bottom:6px;}
+.sb-link{display:block;font-size:14px;color:var(--text-secondary);padding:6px 8px;border-radius:var(--radius-sm);transition:all .12s;line-height:1.45;}
 .sb-link:hover{color:var(--text-primary);background:var(--bg-raised);text-decoration:none;}
 .sb-link.active{color:var(--accent);background:var(--accent-dim);font-weight:500;}
-.sb-link.sub{padding-left:18px;font-size:12.5px;}
+.sb-link.sub{padding-left:18px;font-size:13px;}
 .docs-main{margin-left:var(--sidebar-w);flex:1;min-width:0;}
 .hero{padding:72px 64px 56px;background:var(--bg-surface);border-bottom:1px solid var(--border);}
 .badge{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--text-secondary);background:var(--bg-raised);margin-bottom:20px;}
@@ -242,12 +252,16 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
 .footer-copy{font-size:12px;color:var(--text-muted);}.footer-copy a{color:var(--accent);}
 .footer-built{font-family:var(--mono);font-size:11.5px;color:var(--text-muted);}
 @media(max-width:1024px){.sidebar{width:220px;}.docs-main{margin-left:220px;}.feat-grid{grid-template-columns:1fr 1fr;}.steps-grid{grid-template-columns:1fr;}.sec-grid{grid-template-columns:1fr;}.roadmap-grid{grid-template-columns:1fr 1fr;}.callout-row{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);width:260px;}.docs-main{margin-left:0;}.hero,.doc-section,.install-bar,footer{padding-left:24px;padding-right:24px;}.pipe-steps{grid-template-columns:1fr 1fr;}.feat-grid{grid-template-columns:1fr;}.flag-row{grid-template-columns:1fr;gap:2px;}.roadmap-grid{grid-template-columns:1fr;}.callout-row{grid-template-columns:1fr;}.err-row{grid-template-columns:1fr;}.api-param-row{grid-template-columns:1fr;}}
+@media(max-width:768px){.sidebar-toggle{display:flex;}.sidebar{transform:translateX(-100%);width:280px;max-width:82vw;z-index:250;box-shadow:2px 0 24px rgba(0,0,0,.18);transition:transform .22s ease;}.sidebar.open{transform:translateX(0);}.docs-main{margin-left:0;}.nav-links{display:none;}.hero,.doc-section,.install-bar,footer{padding-left:20px;padding-right:20px;}.pipe-steps{grid-template-columns:1fr 1fr;}.feat-grid{grid-template-columns:1fr;}.flag-row{grid-template-columns:1fr;gap:2px;}.roadmap-grid{grid-template-columns:1fr;}.callout-row{grid-template-columns:1fr;}.err-row{grid-template-columns:1fr;}.api-param-row{grid-template-columns:1fr;}.hero{padding-top:32px;padding-bottom:32px;}.hero-stats{flex-wrap:wrap;width:100%;}.hstat{flex:1 1 40%;padding:10px 12px;}.nav-gh span,.nav-gh{white-space:nowrap;}.nav-btn{padding:5px 12px;font-size:13px;}}
+@media(max-width:480px){.nav-inner{padding:0 12px;gap:6px;}.nav-logo{font-size:13.5px;margin-right:4px;}.nav-gh{display:none;}.version-badge{display:none;}.hero,.doc-section,.install-bar,footer{padding-left:16px;padding-right:16px;}.hero-title{letter-spacing:-1px;}.hero-actions{gap:8px;}.btn-primary,.btn-outline{padding:8px 14px;font-size:13px;}.hstat{flex:1 1 45%;}.hstat-val{font-size:17px;}.pipe-steps{grid-template-columns:1fr;}.install-inner{gap:8px;}.install-box{min-width:0;max-width:100%;width:100%;}.install-label{display:none;}.sec-title{letter-spacing:-0.4px;}.code-block pre{font-size:12px;padding:14px 14px;}.term-body{font-size:12px;padding:14px;}.term-input-row{padding:8px 14px;flex-wrap:wrap;}}
 </style>
 </head>
 <body>
 <nav>
   <div class="nav-inner">
+    <button class="sidebar-toggle" id="sidebarToggle" title="Toggle navigation" aria-label="Toggle navigation">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <div class="nav-logo">🛰️ <span>PyGeo</span>Fetch</div>
     <div class="nav-links">
       <a href="#quickstart">Quick Start</a>
@@ -273,89 +287,122 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
     </div>
   </div>
 </nav>
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
 <div class="docs-layout">
 <aside class="sidebar" id="sidebar">
-  <div class="sb-section">
-    <div class="sb-title">Getting Started</div>
-    <a href="#overview" class="sb-link active">Overview</a>
-    <a href="#install" class="sb-link">Installation</a>
-    <a href="#quickstart" class="sb-link">Quick Start</a>
-    <a href="#doctor" class="sb-link">Doctor / Diagnostics</a>
+  <div class="sb-section open">
+    <button class="sb-title" type="button"><span>Getting Started</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#overview" class="sb-link active">Overview</a>
+      <a href="#install" class="sb-link">Installation</a>
+      <a href="#quickstart" class="sb-link">Quick Start</a>
+      <a href="#doctor" class="sb-link">Doctor / Diagnostics</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Authentication</div>
-    <a href="#auth-add" class="sb-link">Adding Credentials</a>
-    <a href="#auth-env" class="sb-link">Environment Variables</a>
-    <a href="#auth-table" class="sb-link">Provider Auth Types</a>
+    <button class="sb-title" type="button"><span>Authentication</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#auth-add" class="sb-link">Adding Credentials</a>
+      <a href="#auth-env" class="sb-link">Environment Variables</a>
+      <a href="#auth-table" class="sb-link">Provider Auth Types</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Search</div>
-    <a href="#search-basic" class="sb-link">Basic Search</a>
-    <a href="#search-flags" class="sb-link">All Flags</a>
-    <a href="#search-formats" class="sb-link">Output Formats</a>
-    <a href="#search-cql2" class="sb-link">CQL2 Filters</a>
+    <button class="sb-title" type="button"><span>Search</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#search-basic" class="sb-link">Basic Search</a>
+      <a href="#search-flags" class="sb-link">All Flags</a>
+      <a href="#search-formats" class="sb-link">Output Formats</a>
+      <a href="#search-cql2" class="sb-link">CQL2 Filters</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Download</div>
-    <a href="#download-basic" class="sb-link">Basic Download</a>
-    <a href="#download-flags" class="sb-link">All Flags</a>
-    <a href="#download-bands" class="sb-link">Band Selection</a>
-    <a href="#download-postprocess" class="sb-link">Post-Processing</a>
+    <button class="sb-title" type="button"><span>Download</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#download-basic" class="sb-link">Basic Download</a>
+      <a href="#download-flags" class="sb-link">All Flags</a>
+      <a href="#download-bands" class="sb-link">Band Selection</a>
+      <a href="#download-postprocess" class="sb-link">Post-Processing</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Providers</div>
-    <a href="#providers" class="sb-link sub">All 22 Providers</a>
-    <a href="#providers" class="sb-link sub">Filter by Capability</a>
+    <button class="sb-title" type="button"><span>Providers</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#providers" class="sb-link sub">All 22 Providers</a>
+      <a href="#providers" class="sb-link sub">Filter by Capability</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">InSAR</div>
-    <a href="#insar" class="sb-link">Overview</a>
-    <a href="#insar-slc" class="sb-link">SLC Extraction</a>
-    <a href="#insar-interferogram" class="sb-link">Interferogram Generation</a>
-    <a href="#insar-unwrap" class="sb-link">Phase Unwrapping</a>
-    <a href="#insar-timeseries" class="sb-link">SBAS Time Series</a>
-    <a href="#insar-atmosphere" class="sb-link">Atmospheric Correction</a>
-    <a href="#orbit-files" class="sb-link">Orbit Files</a>
+    <button class="sb-title" type="button"><span>InSAR</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#insar" class="sb-link">Overview</a>
+      <a href="#insar-slc" class="sb-link">SLC Extraction</a>
+      <a href="#insar-interferogram" class="sb-link">Interferogram Generation</a>
+      <a href="#insar-unwrap" class="sb-link">Phase Unwrapping</a>
+      <a href="#insar-timeseries" class="sb-link">SBAS Time Series</a>
+      <a href="#insar-atmosphere" class="sb-link">Atmospheric Correction</a>
+      <a href="#orbit-files" class="sb-link">Orbit Files</a>
+      <a href="#insar-validate" class="sb-link">Data Validation</a>
+      <a href="#insar-coregister" class="sb-link">Real Coregistration</a>
+      <a href="#insar-vertical" class="sb-link">LOS-to-Vertical</a>
+      <a href="#insar-autoviz" class="sb-link">Auto-Visualization</a>
+      <a href="#insar-gpu" class="sb-link">GPU Acceleration</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">SAR Processing</div>
-    <a href="#sar-processing" class="sb-link">SARProcessor</a>
+    <button class="sb-title" type="button"><span>SAR Processing</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#sar-processing" class="sb-link">SARProcessor</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Processing</div>
-    <a href="#processing" class="sb-link">Spectral Indices</a>
-    <a href="#processing-landsat" class="sb-link">Landsat Extraction</a>
-    <a href="#timeseries" class="sb-link">TimeSeriesAnalyzer</a>
-    <a href="#preprocessing" class="sb-link">Preprocessing Engine</a>
-    <a href="#postprocessing" class="sb-link">Postprocessing</a>
+    <button class="sb-title" type="button"><span>Processing</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#processing" class="sb-link">Spectral Indices</a>
+      <a href="#processing-landsat" class="sb-link">Landsat Extraction</a>
+      <a href="#timeseries" class="sb-link">TimeSeriesAnalyzer</a>
+      <a href="#preprocessing" class="sb-link">Preprocessing Engine</a>
+      <a href="#terrain-analysis" class="sb-link">Terrain Analysis (DEM/DSM/DTM)</a>
+      <a href="#postprocessing" class="sb-link">Postprocessing</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Visualization</div>
-    <a href="#viz" class="sb-link">Plotter</a>
-    <a href="#viz-map" class="sb-link">MapViewer</a>
+    <button class="sb-title" type="button"><span>Visualization</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#viz" class="sb-link">Plotter</a>
+      <a href="#viz-map" class="sb-link">MapViewer</a>
+      <a href="#viz-3d" class="sb-link">3D Terrain</a>
+      <a href="#viz-split" class="sb-link">Split Comparison</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Pipelines</div>
-    <a href="#pipeline-yaml" class="sb-link">YAML Pipelines</a>
-    <a href="#pipeline-steps" class="sb-link">Pipeline Steps</a>
-    <a href="#pipeline-schedule" class="sb-link">Scheduling</a>
+    <button class="sb-title" type="button"><span>Pipelines</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#pipeline-yaml" class="sb-link">YAML Pipelines</a>
+      <a href="#pipeline-steps" class="sb-link">Pipeline Steps</a>
+      <a href="#pipeline-schedule" class="sb-link">Scheduling</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Python API</div>
-    <a href="#api" class="sb-link">pygeofetch class</a>
-    <a href="#api-search" class="sb-link">SearchQuery params</a>
-    <a href="#api-download" class="sb-link">DownloadOptions</a>
+    <button class="sb-title" type="button"><span>Python API</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#api" class="sb-link">pygeofetch class</a>
+      <a href="#api-search" class="sb-link">SearchQuery params</a>
+      <a href="#api-download" class="sb-link">DownloadOptions</a>
+    </div></div>
   </div>
   <div class="sb-section">
-    <div class="sb-title">Reference</div>
-    <a href="#cli" class="sb-link">CLI Reference</a>
-    <a href="#config" class="sb-link">Configuration</a>
-    <a href="#security" class="sb-link">Security</a>
-    <a href="#errors" class="sb-link">Error Handling</a>
-    <a href="#docker" class="sb-link">Docker</a>
-    <a href="#testing" class="sb-link">Testing</a>
-    <a href="#roadmap" class="sb-link">Roadmap</a>
+    <button class="sb-title" type="button"><span>Reference</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#cli" class="sb-link">CLI Reference</a>
+      <a href="#config" class="sb-link">Configuration</a>
+      <a href="#security" class="sb-link">Security</a>
+      <a href="#errors" class="sb-link">Error Handling</a>
+      <a href="#docker" class="sb-link">Docker</a>
+      <a href="#testing" class="sb-link">Testing</a>
+      <a href="#roadmap" class="sb-link">Roadmap</a>
+    </div></div>
   </div>
 </aside>
 
@@ -876,6 +923,61 @@ unwrapped, conncomp = unwrapper.unwrap(result.interferogram, result.coherence)</
 )</pre>
   </div>
   <p>Served by ESA as <code class="ci">.EOF.zip</code>; extraction is automatic, always returning a directly-usable <code class="ci">.EOF</code> path.</p>
+
+  <h3 id="insar-validate">Data Validation</h3>
+  <p><code class="ci">DataValidator</code> runs automatically at real pipeline entry points, not just available-but-unused: input SLC sanity checks (complex dtype, NaN, dynamic range) at the start of every <code class="ci">process_pair()</code> call, coherence range checks after estimation, and SBAS network connectivity checks before the expensive inversion runs.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">validation (usually automatic — shown here directly)</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>from pygeofetch.insar import DataValidator
+
+result = DataValidator.validate_slc(slc_array, name="reference SLC")
+result.raise_if_invalid()  <span class="tc"># clear ValueError, not a downstream numerical artifact</span></pre>
+  </div>
+  <div class="alert alert-ok">Catches a real failure mode a naive dtype check misses: amplitude-only data cast to a complex dtype (<code class="ci">real + 0j</code>) passes both the dtype check and the amplitude-variation check — it's genuinely complex64, and amplitude does vary. The validator specifically checks for near-zero imaginary part everywhere, which real SAR phase never has.</div>
+
+  <h3 id="insar-coregister">Real Orbit-Based Coregistration</h3>
+  <p>TOPS mode needs ~0.001-pixel coregistration accuracy (Yagüe-Martínez et al. 2016) — the proven method for reaching it is orbit-based geometric coregistration, not a shape-matching guess. Ground points are sampled directly from a real DEM's own geographic coordinates (closed-form, always converges) and located in both the reference and secondary orbits via a real zero-Doppler time solve — verified sub-microsecond accurate even from a starting guess 30 seconds off.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">real coregistration</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>gen = InterferogramGenerator(esd_enabled=True, use_gpu=False)
+result = gen.process_pair(
+    reference="slc_ref.tif", secondary="slc_sec.tif", dem="dem.tif",
+    reference_safe_zip="ref.SAFE.zip", secondary_safe_zip="sec.SAFE.zip",
+    reference_orbit_file=fetch_orbit_file("S1A_..._ref"),
+    secondary_orbit_file=fetch_orbit_file("S1A_..._sec"),
+)</pre>
+  </div>
+  <p>Supply all four (plus a DEM) and it's used automatically — verified <strong>49/49</strong> grid points on a realistic scene, versus 21–28/49 failures with an earlier pixel-driven approach that was tried and abandoned. Omit any of the four and it falls back cleanly to shape-based resampling, with a clear log line stating which path ran — never a silent, unexplained accuracy difference.</p>
+  <div class="alert alert-warn"><strong>Honest, documented limitation:</strong> the lower-level <code class="ci">solve_ground_point()</code> (an alternative, pixel-driven geolocation solve) has a known reliability gap — roughly 94% per-call, worse under repeated grid use — and is deliberately <em>not</em> exported as a primary API. It always fails safely (a clear error, never a silently wrong answer), but isn't recommended for unattended use. Full debugging history in <code class="ci">pygeofetch/insar/README.md</code>.</div>
+
+  <h3 id="insar-vertical">LOS-to-Vertical Conversion</h3>
+  <p>InSAR measures line-of-sight range change — the true 3D displacement vector projected onto the satellite's single viewing direction. With one geometry, that's one equation and three unknowns, genuinely underdetermined. <code class="ci">los_to_vertical_displacement()</code> applies the standard literature technique (Fialko et al. 2001, Hooper et al. 2012): assume horizontal motion is negligible.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">los to vertical</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>from pygeofetch.insar import los_to_vertical_displacement
+
+vertical_velocity = los_to_vertical_displacement(
+    ts_result.velocity, incidence_angle_deg=39.0
+)</pre>
+  </div>
+  <div class="alert alert-info">This is an <strong>assumption</strong>, not a measurement — defensible for vertically-dominated sources like mining/groundwater subsidence, actively wrong for landslides or fault creep with a real lateral component. Verified: a plausible 10mm horizontal component produces ~1.7mm of real error in the recovered "vertical" value if the assumption doesn't hold. Sentinel-1's near-polar orbit is also nearly blind to north-south motion regardless of this conversion — a genuine geometric ceiling, not a processing limitation. A rigorous decomposition needs a second, independent LOS geometry (e.g. a descending pass).</div>
+
+  <h3 id="insar-autoviz">Automatic Visualization</h3>
+  <p>Every stage — interferogram formation, unwrapping, SBAS inversion — can save PNGs alongside its GeoTIFFs with one flag, reusing <code class="ci">Plotter</code> rather than duplicating plotting logic.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">auto-visualize</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>result.save("./output", auto_visualize=True)
+<span class="tc"># wrapped_phase.png, coherence.png, amplitude.png — alongside the GeoTIFFs</span></pre>
+  </div>
+  <p>A visualization failure only logs a warning — it never blocks or loses the actual GeoTIFF output.</p>
+
+  <h3 id="insar-gpu">GPU Acceleration</h3>
+  <p>Optional CuPy backend for coherence estimation and SBAS inversion's large matrix solve — the two steps that dominate processing time on large scenes.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">gpu</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>gen = InterferogramGenerator(use_gpu=True)   <span class="tc"># auto-detects; falls back to CPU cleanly if none found</span></pre>
+  </div>
+  <div class="alert alert-warn"><code class="ci">use_gpu</code> defaults to <code class="ci">False</code> — opt-in, not opt-out. The CPU path is byte-for-byte verified identical to the pre-existing implementation, and the no-GPU detection/fallback logic is directly tested; the actual CUDA execution path has not been verified against real GPU hardware.</div>
 </div>
 
 <!-- SAR PROCESSING -->
@@ -1019,6 +1121,34 @@ reproj    = client.preprocess.reproject("scene.tif", crs="EPSG:4326")</pre>
     </table>
   </div>
   <div class="alert alert-ok"><strong><code class="ci">clip()</code> CRS handling, verified:</strong> a WGS84 boundary polygon (the normal format for AOI GeoJSON) clipped against a raster in its native UTM projection (the normal delivery format for real satellite imagery) is now automatically reprojected to match before masking — confirmed against a real UTM Zone 30N test raster. This previously failed silently with a near-empty intersection window rather than a clear CRS error.</div>
+
+  <h3 id="terrain-analysis">Terrain Analysis (DEM / DSM / DTM)</h3>
+  <p>Real hydrological and terrain-shape analysis on any DEM — each method individually verified against a known analytical or physically-realistic case before being trusted, not just run once and eyeballed.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">terrain analysis</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>pp = client.preprocess
+
+terrain = pp.terrain_derivatives("dem.tif")           <span class="tc"># slope, aspect, hillshade</span>
+twi     = pp.topographic_wetness_index("dem.tif")      <span class="tc"># real flood-susceptibility screening</span>
+curv    = pp.curvature("dem.tif")                      <span class="tc"># concave/convex — water convergence vs. dispersion</span>
+tri     = pp.terrain_ruggedness_index("dem.tif")       <span class="tc"># Riley et al. 1999</span>
+sinks   = pp.identify_depressions("dem.tif")           <span class="tc"># enclosed basins with no downhill outlet</span>
+network = pp.extract_drainage_network("dem.tif")       <span class="tc"># real channels from D8 flow accumulation</span></pre>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Method</th><th>Basis</th><th>Verified against</th></tr></thead>
+      <tbody>
+        <tr><td><code>terrain_derivatives()</code></td><td>Horn-method gradient</td><td>Known cone geometry — recovered slope exact</td></tr>
+        <tr><td><code>topographic_wetness_index()</code></td><td>Beven &amp; Kirkby 1979, D8 flow accumulation</td><td>Sloped-plane flow accumulation exact; V-valley floor correctly ranked wetter than steep sides</td></tr>
+        <tr><td><code>curvature()</code></td><td>Laplacian (∇²z)</td><td>Known paraboloid bowl — constant analytical curvature recovered</td></tr>
+        <tr><td><code>terrain_ruggedness_index()</code></td><td>Riley et al. 1999</td><td>Flat surface → exact 0; checkerboard → large, correct value</td></tr>
+        <tr><td><code>identify_depressions()</code></td><td>Morphological reconstruction (fill-then-diff)</td><td>Known synthetic 20m basin — exact depth recovered</td></tr>
+        <tr><td><code>extract_drainage_network()</code></td><td>D8 flow accumulation, thresholded</td><td>V-valley test — channel correctly concentrated at the true valley floor</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="alert alert-info">Open elevation products (SRTM, Copernicus DEM) are <strong>surface models</strong>, not clean bare-earth DTMs — over forested or vegetated terrain, some canopy height is baked into the "ground" elevation. A genuine Canopy Height Model needs a real bare-earth DTM, typically from LiDAR, which isn't available through PyGeoFetch's current open-data providers. This isn't worked around by fabricating a DTM that doesn't exist — treated as an honest, stated limitation.</div>
 </div>
 
 <!-- POSTPROCESSING -->
@@ -1090,6 +1220,33 @@ mv.add_basemap("SATELLITE")
 mv.save("interactive_map.html")</pre>
   </div>
   <div class="alert alert-warn"><code class="ci">add_raster()</code> needs <code class="ci">rioxarray</code> and <code class="ci">localtileserver</code> alongside leafmap — both declared in the <code class="ci">[viz]</code> extra.</div>
+
+  <h3 id="viz-3d">3D Terrain Visualization</h3>
+  <p>Two options depending on what actually matters for the output: a fast, dependency-light static render, or a genuinely interactive mesh when the audience needs to rotate and explore it themselves.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">3D terrain</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre><span class="tc"># Fast, static, no extra dependency — hillshade-draped 3D surface</span>
+pl.plot_3d_terrain("dem.tif", drape=susceptibility, drape_colormap="Blues")
+
+<span class="tc"># Real interactive mesh (PyVista) — rotate/zoom/pan in-browser,</span>
+<span class="tc"># exported as a standalone HTML file, no server needed</span>
+pl.plot_3d_terrain_interactive(
+    "dem.tif", drape=twi, drape_colormap="YlGnBu",
+    output="terrain_interactive.html",
+)</pre>
+  </div>
+  <div class="alert alert-ok">Both hardened against a real failure mode: a near-uniform elevation field (e.g. an AOI that barely overlaps real terrain) previously rendered as a flat, confusingly "empty" plot with no explanation. Now raises a clear warning identifying the actual cause instead of a silent, confusing blank render.</div>
+  <p><code class="ci">plot_3d_terrain_interactive()</code> needs <code class="ci">pip install "pyvista[jupyter]"</code> — the <code class="ci">[jupyter]</code> extra specifically for HTML export.</p>
+
+  <h3 id="viz-split">Split-Panel Comparison</h3>
+  <p>Draggable side-by-side comparison of two rasters — e.g. a DSM against a DTM, or two independent DEM sources — backed by leafmap's own <code class="ci">split_map()</code>, not a new dependency.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">split comparison</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>mv.add_split_comparison(
+    "dsm.tif", "dtm.tif", left_label="DSM", right_label="DTM",
+)</pre>
+  </div>
+  <div class="alert alert-warn">The interactive split view depends on <code class="ci">localtileserver</code> spinning up a real local background HTTP server, which is known to fail in some restricted/sandboxed network environments (firewalls, some corporate VPNs) with a <code class="ci">ServerDownError</code>. When that happens, <code class="ci">add_split_comparison()</code> automatically falls back to a static side-by-side comparison that needs no server at all — verified directly against the real error.</div>
 </div>
 
 
@@ -2214,12 +2371,50 @@ const observer = new IntersectionObserver(entries => {
     if (e.isIntersecting) {
       const id = e.target.id;
       links.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+        const isActive = l.getAttribute('href') === '#' + id;
+        l.classList.toggle('active', isActive);
+        if (isActive) {
+          const parentSection = l.closest('.sb-section');
+          if (parentSection) parentSection.classList.add('open');
+        }
       });
     }
   });
 }, { rootMargin: '-56px 0px -70% 0px', threshold: 0 });
 sections.forEach(s => observer.observe(s));
+
+/* ── Sidebar accordions ── */
+document.querySelectorAll('.sb-title').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.closest('.sb-section').classList.toggle('open');
+  });
+});
+
+/* ── Mobile sidebar toggle ── */
+const sidebarEl = document.getElementById('sidebar');
+const sidebarToggleBtn = document.getElementById('sidebarToggle');
+const sidebarBackdropEl = document.getElementById('sidebarBackdrop');
+
+function openSidebar() {
+  sidebarEl.classList.add('open');
+  sidebarBackdropEl.classList.add('open');
+}
+function closeSidebar() {
+  sidebarEl.classList.remove('open');
+  sidebarBackdropEl.classList.remove('open');
+}
+if (sidebarToggleBtn) {
+  sidebarToggleBtn.addEventListener('click', () => {
+    sidebarEl.classList.contains('open') ? closeSidebar() : openSidebar();
+  });
+}
+if (sidebarBackdropEl) {
+  sidebarBackdropEl.addEventListener('click', closeSidebar);
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSidebar();
+});
+links.forEach(l => l.addEventListener('click', closeSidebar));
 </script>
 </body>
 </html>
