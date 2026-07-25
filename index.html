@@ -119,6 +119,18 @@ td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top;co
 tr:last-child td{border-bottom:none;}tr:hover td{background:var(--bg-page);}
 td code{font-family:var(--mono);font-size:11.5px;background:var(--bg-raised);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1px 5px;}
 .providers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:16px;}
+.notebooks-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin-top:16px;}
+.ncard{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;transition:border-color .15s;display:flex;flex-direction:column;}
+.ncard:hover{border-color:var(--border-strong);}
+.nc-top{display:flex;align-items:baseline;gap:8px;margin-bottom:6px;}
+.nc-num{font-family:var(--mono);font-size:11px;color:var(--accent);font-weight:600;flex-shrink:0;}
+.nc-name{font-size:13.5px;font-weight:600;color:var(--text-primary);line-height:1.35;}
+.nc-desc{font-size:12px;color:var(--text-secondary);line-height:1.55;flex:1;margin-bottom:12px;}
+.nc-actions{display:flex;gap:6px;}
+.nc-colab{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:5px;font-size:11.5px;font-weight:500;padding:6px 10px;border-radius:var(--radius-sm);background:var(--accent);color:#fff;transition:background .15s;white-space:nowrap;}
+.nc-colab:hover{background:var(--accent-hover);text-decoration:none;}
+.nc-gh{display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;padding:6px 10px;border-radius:var(--radius-sm);border:1px solid var(--border);color:var(--text-secondary);transition:all .15s;}
+.nc-gh:hover{border-color:var(--border-strong);color:var(--text-primary);background:var(--bg-raised);text-decoration:none;}
 .pcard{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;transition:border-color .15s;}
 .pcard:hover{border-color:var(--accent);}
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:4px;}
@@ -277,7 +289,7 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
       <a href="#config">Config</a>
     </div>
     <div class="nav-right">
-      <span class="version-badge">v1.9.1</span>
+      <span class="version-badge">v2.0.0</span>
       <a href="https://github.com/appiahkubis14/pygeofetch" class="nav-gh" target="_blank">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.34C3.73 14.36 3.26 12.9 3.26 12.9c-.36-.92-.88-1.16-.88-1.16-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.22 1.86.87 2.31.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.67 7.67 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0z"/></svg>
         GitHub
@@ -298,6 +310,12 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
       <a href="#install" class="sb-link">Installation</a>
       <a href="#quickstart" class="sb-link">Quick Start</a>
       <a href="#doctor" class="sb-link">Doctor / Diagnostics</a>
+    </div></div>
+  </div>
+  <div class="sb-section">
+    <button class="sb-title" type="button"><span>Example Notebooks</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
+    <div class="sb-links"><div class="sb-links-inner">
+      <a href="#notebooks" class="sb-link">All 21 Notebooks</a>
     </div></div>
   </div>
   <div class="sb-section">
@@ -410,7 +428,7 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
 
 <!-- HERO -->
 <div class="hero" id="overview">
-  <div class="badge"><span class="badge-dot"></span>v1.9.1 · Actively Developed</div>
+  <div class="badge"><span class="badge-dot"></span>v2.0.0 · Actively Developed</div>
   <h1 class="hero-title"><strong>pygeofetch</strong> Documentation</h1>
   <p class="hero-sub">Universal satellite data pipeline — unified access to 22+ providers. Handles auth, federated search, parallel downloads, caching, band selection, and post-processing.</p>
   <div class="hero-actions">
@@ -470,7 +488,7 @@ pip install "pygeofetch[all]"</div>
     <div class="step-card">
       <div class="step-card-header"><div class="step-num">2</div><div class="step-title">Verify installation</div></div>
       <div class="step-code">pygeofetch --version
-<span style="color:#8c959f;font-style:italic"># → pygeofetch, version 1.9.1</span>
+<span style="color:#8c959f;font-style:italic"># → pygeofetch, version 2.0.0</span>
 
 pygeofetch doctor
 <span style="color:#8c959f;font-style:italic"># Checks Python, packages, keyring,</span>
@@ -545,6 +563,184 @@ pygeofetch doctor
   <div class="alert alert-warn"><strong>What this can and can't claim:</strong> an NDVI trend map alone can't distinguish <em>why</em> vegetation declined — illegal small-scale mining (galamsey), selective logging, agricultural clearing, and urban expansion can all produce a similar signature. Given Obuasi's well-documented galamsey activity, the pattern here is <em>consistent with</em> mining-driven clearance — confirming that specific cause would need higher-resolution imagery or ground verification, not this analysis alone. The scattered dark-blue linear features in the trend map are very likely water bodies (rivers), not vegetation gain — NDVI trend over open water isn't a meaningful signal.</div>
 
   <p>Built from: real Obuasi Municipal District boundary polygon (not a bounding-box rectangle) → federated USGS search with a real geoJson spatial filter → clip-first processing (boundary-clipped before any scaling or masking) → <code class="ci">TimeSeriesAnalyzer.build_index_stack()</code> across 6 dry-season composites → <code class="ci">.trend()</code> and <code class="ci">.zonal_timeseries()</code> → <code class="ci">Plotter.plot_raster()</code> and <code class="ci">.plot_classification()</code>, entirely via PyGeoFetch's own visualization module.</p>
+</div>
+
+<!-- NOTEBOOKS -->
+<div class="doc-section alt" id="notebooks">
+  <div class="sec-label">Example Notebooks</div>
+  <h2 class="sec-title">21 Real, Runnable Notebooks</h2>
+  <p class="sec-sub">Every notebook below is a real workflow built and run against live data throughout this project — not templates. Each card opens directly from GitHub, no manual download or Drive upload needed.</p>
+  <div class="alert alert-info"><strong>Before you click Colab:</strong> pygeofetch isn't preinstalled — add <code class="ci">!pip install "pygeofetch[insar]"</code> (or whichever extra the notebook needs) as your first cell. Several notebooks need real provider credentials (Copernicus, USGS, OpenTopography) to run their live-data cells — Colab can open and read every notebook regardless, but running the authenticated cells needs your own account. A couple of the earlier notebooks also expect an uploaded boundary file; re-upload it to the Colab session if that cell fails.</div>
+  <div class="notebooks-grid">
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">01</span><span class="nc-name">Getting Started</span></div>
+      <div class="nc-desc">Install, run doctor diagnostics, first search, first download — the fastest path to a working setup.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/01_getting_started.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/01_getting_started.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">02</span><span class="nc-name">Authentication & Providers</span></div>
+      <div class="nc-desc">All 22 providers, credential storage via system keyring, capability-based filtering.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/02_authentication_and_providers.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/02_authentication_and_providers.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">03</span><span class="nc-name">Advanced Search</span></div>
+      <div class="nc-desc">Federated search across providers, CQL2 filters, all 7 output formats, result caching.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/03_advanced_search%20%281%29.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/03_advanced_search%20%281%29.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">04</span><span class="nc-name">Download & Postprocessing</span></div>
+      <div class="nc-desc">Band selection, parallel downloads with resume support, the full postprocessing chain.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/04_download_and_postprocessing.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/04_download_and_postprocessing.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">05</span><span class="nc-name">Pipelines & Scheduling</span></div>
+      <div class="nc-desc">YAML pipeline orchestration, cron scheduling, the Python pipeline builder API.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/05_pipelines_and_scheduling.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/05_pipelines_and_scheduling.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">06</span><span class="nc-name">Real-World Workflows</span></div>
+      <div class="nc-desc">NDVI time series, change detection, and multi-sensor fusion end to end.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/06_real_world_workflows.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/06_real_world_workflows.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">07</span><span class="nc-name">Copernicus & Authenticated Providers</span></div>
+      <div class="nc-desc">Copernicus, USGS, NASA Earthdata, Planet, ASF, and OpenTopography — real auth flows.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/07_copernicus_and_authenticated_providers.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/07_copernicus_and_authenticated_providers.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">08</span><span class="nc-name">CLI Complete Reference</span></div>
+      <div class="nc-desc">Every CLI command demonstrated with runnable examples, not just documented.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/08_cli_complete_reference.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/08_cli_complete_reference.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">09</span><span class="nc-name">Processing Engine — Complete</span></div>
+      <div class="nc-desc">The full processing engine: preprocessing, all 17 spectral indices, SAR, pipelines.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/09_processing_complete.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/09_processing_complete.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">10</span><span class="nc-name">SAR / InSAR Complete Pipeline</span></div>
+      <div class="nc-desc">Despeckling, calibration, and the full InSAR chain from SLC extraction to unwrapping.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/10_sar_insar_complete_pipeline%20%281%29.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/10_sar_insar_complete_pipeline%20%281%29.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">11</span><span class="nc-name">InSAR Subsidence Monitoring</span></div>
+      <div class="nc-desc">A real subsidence-monitoring project built on the InSAR pipeline, reference-pixel included.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/11_insar_subsidence_monitoring_project.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/11_insar_subsidence_monitoring_project.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">12</span><span class="nc-name">USGS Landsat — Complete Pipeline</span></div>
+      <div class="nc-desc">Full Landsat 1–9 workflow via USGS Machine-to-Machine API, search through indices.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/12_usgs_landsat_complete_pipeline.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/12_usgs_landsat_complete_pipeline.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">13</span><span class="nc-name">Ghana Deforestation Monitoring</span></div>
+      <div class="nc-desc">Real Landsat-based forest-loss detection over a Ghanaian AOI, boundary-clipped.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/13_usgs_ghana_deforestation_monitoring%20new.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/13_usgs_ghana_deforestation_monitoring%20new.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">15</span><span class="nc-name">Obuasi Vegetation Trend (2018–2024)</span></div>
+      <div class="nc-desc">The real-world example above, in full — 32% measurable decline, clip-first, live USGS data.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/15_obuasi_vegetation_timeseries_trend%20%281%29.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/15_obuasi_vegetation_timeseries_trend%20%281%29.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">16</span><span class="nc-name">Accra Flood Recession — SAR</span></div>
+      <div class="nc-desc">SAR-based flood extent and recession mapping over Accra using real Sentinel-1 data.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/16_accra_flood_recession_sar%20%282%29.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/16_accra_flood_recession_sar%20%282%29.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">17</span><span class="nc-name">Accra (GAMA) Flood — Government Boundary</span></div>
+      <div class="nc-desc">Flood analysis clipped to the real Greater Accra Metropolitan Area administrative boundary.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/17_accra_gama_flood_government1.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/17_accra_gama_flood_government1.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">18</span><span class="nc-name">Atewa Forest Deforestation Template</span></div>
+      <div class="nc-desc">A reusable deforestation-monitoring template applied to the Atewa Range Forest Reserve.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/18_atewa_forest_deforestation_template_new.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/18_atewa_forest_deforestation_template_new.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">19</span><span class="nc-name">Accra Urban Expansion</span></div>
+      <div class="nc-desc">Multi-year built-up area growth analysis over Accra using real classified imagery.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/19_accra_urban_expansion.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/19_accra_urban_expansion.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">20</span><span class="nc-name">Afadjato — Multi-Source DEM & 3D Terrain</span></div>
+      <div class="nc-desc">SRTM, Copernicus DEM, NASADEM, and AW3D30 compared over Ghana's tallest peak, in 3D.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/20_afadjato_dem_3d_terrain.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/20_afadjato_dem_3d_terrain.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">21</span><span class="nc-name">Accra Terrain Flood Susceptibility</span></div>
+      <div class="nc-desc">TWI, curvature, terrain ruggedness, and depression analysis for real flood-risk screening.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/21_accra_terrain_flood_susceptibility.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/21_accra_terrain_flood_susceptibility.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+    <div class="ncard">
+      <div class="nc-top"><span class="nc-num">22</span><span class="nc-name">Obuasi InSAR Subsidence — Full SBAS</span></div>
+      <div class="nc-desc">The complete, real orbit-based InSAR chain: search → SBAS inversion → subsidence hotspots.</div>
+      <div class="nc-actions">
+        <a href="https://colab.research.google.com/github/EOCoreINT/pygeofetch/blob/main/notebooks/22_obuasi_insar_subsidence_sbas.ipynb" target="_blank" class="nc-colab">▶ Open in Colab</a>
+        <a href="https://github.com/EOCoreINT/pygeofetch/blob/main/notebooks/22_obuasi_insar_subsidence_sbas.ipynb" target="_blank" class="nc-gh">GitHub</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- AUTH -->
@@ -2047,7 +2243,7 @@ pytest tests/property/ -v --hypothesis-seed=12345</pre>
       <div class="f-logo">🛰️ <span>PyGeo</span>Fetch</div>
       <div class="f-desc">Universal satellite data pipeline. One CLI, one Python API, 22+ providers. MIT licensed.</div>
       <div class="f-badges">
-        <span class="pill">v1.9.1</span>
+        <span class="pill">v2.0.0</span>
         <span class="pill">MIT</span>
         <span class="pill">Python 3.9+</span>
         <span class="pill">60 Tests</span>
@@ -2086,7 +2282,7 @@ pytest tests/property/ -v --hypothesis-seed=12345</pre>
   </div>
   <div class="footer-bottom">
     <div class="footer-copy">© 2025 <a href="https://github.com/appiahkubis14" target="_blank">Samuel Appiah Kubi</a>. Released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</div>
-    <div class="footer-built">pygeofetch v1.9.1</div>
+    <div class="footer-built">pygeofetch v2.0.0</div>
   </div>
 </footer>
 
@@ -2146,11 +2342,11 @@ function filterP(key, btn) {
 const termOutputs = {
   doctor: `<span class="term-prompt">$ </span><span class="term-cmd">pygeofetch doctor</span>
 
-<span class="term-info">pygeofetch Doctor v1.9.1</span>
+<span class="term-info">pygeofetch Doctor v2.0.0</span>
 <span class="term-out">────────────────────────────────────────────</span>
 
 <span class="term-ok">✓</span> Python 3.11.4 (≥ 3.9 required)
-<span class="term-ok">✓</span> pygeofetch 1.9.1 installed
+<span class="term-ok">✓</span> pygeofetch 2.0.0 installed
 <span class="term-ok">✓</span> click 8.1.7
 <span class="term-ok">✓</span> httpx 0.27.0
 <span class="term-ok">✓</span> pydantic 2.7.1
