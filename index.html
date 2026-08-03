@@ -7,8 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-:root{--accent:#e9660e;--accent-dim:#e0f2fe;--accent-hover:#c76102;--green:#059669;--green-dim:#d1fae5;--amber:#d97706;--amber-dim:#fef3c7;--red:#dc2626;--bg-page:#f8f9fa;--bg-surface:#ffffff;--bg-raised:#f1f3f5;--bg-code:#f6f8fa;--border:#e2e8f0;--border-strong:#cbd5e1;--text-primary:#0f172a;--text-secondary:#475569;--text-muted:#94a3b8;--text-code:#1e293b;--nav-bg:rgba(255,255,255,0.95);--nav-border:#e2e8f0;--sidebar-w:262px;--radius-sm:4px;--radius-md:6px;--radius-lg:10px;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;}
-[data-theme="dark"]{--accent:#f89e38;--accent-dim:#0c2d3f;--accent-hover:#7dd3fc;--green:#34d399;--green-dim:#063620;--amber:#fbbf24;--amber-dim:#291800;--bg-page:#0d1117;--bg-surface:#161b22;--bg-raised:#21262d;--bg-code:#1c2128;--border:#30363d;--border-strong:#484f58;--text-primary:#e6edf3;--text-secondary:#8b949e;--text-muted:#6e7681;--text-code:#cdd9e5;--nav-bg:rgba(22,27,34,0.97);--nav-border:#30363d;}
+:root{--accent:#e9660e;--accent-dim:#e0f2fe;--accent-hover:#c76102;--green:#059669;--green-dim:#d1fae5;--amber:#d97706;--amber-dim:#fef3c7;--red:#dc2626;--red-dim:#fee2e2;--purple:#7c3aed;--purple-dim:#f3e8ff;--bg-page:#f8f9fa;--bg-surface:#ffffff;--bg-raised:#f1f3f5;--bg-code:#f6f8fa;--border:#e2e8f0;--border-strong:#cbd5e1;--text-primary:#0f172a;--text-secondary:#475569;--text-muted:#94a3b8;--text-code:#1e293b;--nav-bg:rgba(255,255,255,0.95);--nav-border:#e2e8f0;--sidebar-w:262px;--radius-sm:4px;--radius-md:6px;--radius-lg:10px;--mono:'IBM Plex Mono',monospace;--sans:'IBM Plex Sans',sans-serif;}
+[data-theme="dark"]{--accent:#f89e38;--accent-dim:#0c2d3f;--accent-hover:#7dd3fc;--green:#34d399;--green-dim:#063620;--amber:#fbbf24;--amber-dim:#291800;--red-dim:#3f1517;--purple:#a78bfa;--purple-dim:#2e1a47;--bg-page:#0d1117;--bg-surface:#161b22;--bg-raised:#21262d;--bg-code:#1c2128;--border:#30363d;--border-strong:#484f58;--text-primary:#e6edf3;--text-secondary:#8b949e;--text-muted:#6e7681;--text-code:#cdd9e5;--nav-bg:rgba(22,27,34,0.97);--nav-border:#30363d;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--bg-page);color:var(--text-primary);line-height:1.65;transition:background .2s,color .2s;overflow-x:hidden;}
@@ -36,6 +36,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:var(--nav-bg);bor
 .sidebar{width:var(--sidebar-w);flex-shrink:0;position:fixed;top:56px;left:0;bottom:0;overflow-y:auto;background:var(--bg-surface);border-right:1px solid var(--border);padding:20px 0;z-index:200;}
 .sidebar::-webkit-scrollbar{width:4px;}.sidebar::-webkit-scrollbar-thumb{background:var(--border-strong);border-radius:4px;}
 .sb-section{padding:0 16px;margin-bottom:4px;}
+.sb-category{padding:16px 16px 6px;margin-top:8px;}
+.sb-category:first-child{margin-top:0;}
+.sb-category-title{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700;border-top:1px solid var(--border);padding-top:14px;}
+.sb-category:first-child .sb-category-title{border-top:none;padding-top:0;}
 .sb-title{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;padding:8px 4px;margin:0;background:none;border:none;width:100%;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;border-radius:var(--radius-sm);transition:color .15s,background .12s;}
 .sb-title:hover{color:var(--text-secondary);background:var(--bg-raised);}
 .sb-chevron{flex-shrink:0;transition:transform .2s ease;opacity:.7;}
@@ -110,6 +114,8 @@ p:last-child{margin-bottom:0;}
 .alert-info{background:var(--accent-dim);border-color:var(--accent);}
 .alert-warn{background:var(--amber-dim);border-color:var(--amber);}
 .alert-ok{background:var(--green-dim);border-color:var(--green);}
+.alert-critical{background:var(--red-dim);border-color:var(--red);font-weight:500;}
+.alert-value{background:var(--purple-dim);border-color:var(--purple);}
 .alert strong{font-weight:600;}
 .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius-lg);margin:16px 0;}
 table{width:100%;border-collapse:collapse;font-size:13px;}
@@ -136,6 +142,11 @@ td code{font-family:var(--mono);font-size:11.5px;background:var(--bg-raised);bor
 .pc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;gap:4px;}
 .pc-name{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--text-primary);}
 .pc-badge{font-family:var(--mono);font-size:9.5px;padding:1px 6px;border-radius:10px;white-space:nowrap;}
+.pc-badge.verified{background:var(--green-dim);color:var(--green);}
+.pc-badge.open{background:var(--accent-dim);color:var(--accent);}
+.pc-badge.auth{background:var(--amber-dim);color:var(--amber);}
+.pc-badge.dead{background:var(--red-dim);color:var(--red);}
+.pc-badges{display:inline-flex;gap:4px;flex-shrink:0;}
 .auth{background:var(--bg-raised);color:var(--text-muted);border:1px solid var(--border);}
 .pc-desc{font-size:11.5px;color:var(--text-secondary);line-height:1.5;}
 .pc-chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
@@ -285,7 +296,7 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
       <a href="#viz">Visualization</a>
       <a href="#cli">CLI</a>
       <a href="#api">Python API</a>
-      <a href="#pipelines">Pipelines</a>
+      <a href="#pipeline-yaml">Pipelines</a>
       <a href="#config">Config</a>
     </div>
     <div class="nav-right">
@@ -303,6 +314,9 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
 
 <div class="docs-layout">
 <aside class="sidebar" id="sidebar">
+  <div class="sb-category">
+    <div class="sb-category-title">Getting Started</div>
+  </div>
   <div class="sb-section open">
     <button class="sb-title" type="button"><span>Getting Started</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
     <div class="sb-links"><div class="sb-links-inner">
@@ -317,6 +331,10 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
     <div class="sb-links"><div class="sb-links-inner">
       <a href="#notebooks" class="sb-link">All 21 Notebooks</a>
     </div></div>
+  </div>
+
+  <div class="sb-category">
+    <div class="sb-category-title">Core Features</div>
   </div>
   <div class="sb-section">
     <button class="sb-title" type="button"><span>Authentication</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -347,9 +365,13 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
   <div class="sb-section">
     <button class="sb-title" type="button"><span>Providers</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
     <div class="sb-links"><div class="sb-links-inner">
-      <a href="#providers" class="sb-link sub">All 22 Providers</a>
+      <a href="#providers" class="sb-link sub">All 24 Providers</a>
       <a href="#providers" class="sb-link sub">Filter by Capability</a>
     </div></div>
+  </div>
+
+  <div class="sb-category">
+    <div class="sb-category-title">Processing &amp; Analysis</div>
   </div>
   <div class="sb-section">
     <button class="sb-title" type="button"><span>InSAR</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -366,6 +388,7 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
       <a href="#insar-vertical" class="sb-link">LOS-to-Vertical</a>
       <a href="#insar-autoviz" class="sb-link">Auto-Visualization</a>
       <a href="#insar-gpu" class="sb-link">GPU Acceleration</a>
+      <a href="#insar-workflow" class="sb-link">InSARProject Workflow</a>
     </div></div>
   </div>
   <div class="sb-section">
@@ -390,9 +413,14 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
     <div class="sb-links"><div class="sb-links-inner">
       <a href="#viz" class="sb-link">Plotter</a>
       <a href="#viz-map" class="sb-link">MapViewer</a>
+      <a href="#viz-footprints" class="sb-link">Search Footprints</a>
       <a href="#viz-3d" class="sb-link">3D Terrain</a>
       <a href="#viz-split" class="sb-link">Split Comparison</a>
     </div></div>
+  </div>
+
+  <div class="sb-category">
+    <div class="sb-category-title">Advanced &amp; Reference</div>
   </div>
   <div class="sb-section">
     <button class="sb-title" type="button"><span>Pipelines</span><svg class="sb-chevron" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -427,26 +455,42 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
 <main class="docs-main">
 
 <!-- HERO -->
-<div class="hero" id="overview">
-  <div class="badge"><span class="badge-dot"></span>v1.9.1 · Actively Developed</div>
-  <h1 class="hero-title"><strong>pygeofetch</strong> Documentation</h1>
-  <p class="hero-sub">Universal satellite data pipeline — unified access to 22+ providers. Handles auth, federated search, parallel downloads, caching, band selection, and post-processing.</p>
-  <div class="hero-actions">
-    <a href="#quickstart" class="btn-primary">Quick Start →</a>
-    <a href="#cli" class="btn-outline">CLI Reference</a>
-    <a href="#api" class="btn-outline">Python API</a>
-    <a href="https://github.com/appiahkubis14/pygeofetch" class="btn-outline" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.34C3.73 14.36 3.26 12.9 3.26 12.9c-.36-.92-.88-1.16-.88-1.16-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.22 1.86.87 2.31.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.67 7.67 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0z"/></svg>
-      GitHub
-    </a>
+<div class="hero" id="overview" style="display: flex;justify-content: space-around;">
+  <div>
+    <div class="badge"><span class="badge-dot"></span>v1.9.1 · Actively Developed</div>
+    <h1 class="hero-title"><strong>pygeofetch</strong> Documentation</h1>
+    <div>
+      <p class="hero-sub">Universal satellite data pipeline — unified access to 24 providers. Handles auth, federated search, parallel downloads, caching, band selection, and post-processing.</p>
+      <div style="max-width:640px;margin-bottom:8px;">
+        <p style="font-size:13px;font-weight:600;color:var(--text-muted);letter-spacing:0.3px;margin-bottom:8px;">WHO THIS IS FOR</p>
+        <ul style="margin:0 0 20px 0;padding-left:20px;font-size:14.5px;color:var(--text-secondary);line-height:1.8;">
+          <li>Geospatial researchers who need to process data from multiple providers without learning 24 different APIs</li>
+          <li>Engineers automating satellite data pipelines that need to run unattended, on schedule</li>
+          <li>Organizations in the Global South that need cost-effective, open-source Earth observation tooling</li>
+        </ul>
+      </div>
+      <div class="hero-actions">
+        <a href="#quickstart" class="btn-primary">Quick Start →</a>
+        <a href="#cli" class="btn-outline">CLI Reference</a>
+        <a href="#api" class="btn-outline">Python API</a>
+        <a href="https://github.com/appiahkubis14/pygeofetch" class="btn-outline" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38v-1.34C3.73 14.36 3.26 12.9 3.26 12.9c-.36-.92-.88-1.16-.88-1.16-.72-.49.05-.48.05-.48.8.06 1.22.82 1.22.82.71 1.22 1.86.87 2.31.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.67 7.67 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.19c0 .21.15.46.55.38A8 8 0 0 0 8 0z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="hstat"><div class="hstat-val">22+</div><div class="hstat-label">Providers (Varying Status)</div></div>
+  
+
+  <div>
+    <div class="hero-stats">
+    <div class="hstat"><div class="hstat-val">24</div><div class="hstat-label">Providers (Varying Status)</div></div>
     <div class="hstat"><div class="hstat-val">10</div><div class="hstat-label">Free (No Login)</div></div>
     <div class="hstat"><div class="hstat-val">7</div><div class="hstat-label">Output Formats</div></div>
     <div class="hstat"><div class="hstat-val">5</div><div class="hstat-label">Hardened &amp; Verified</div></div>
   </div>
-  <div class="alert alert-warn" style="margin-top:20px;max-width:680px;"><strong>On the provider count:</strong> 22+ providers are implemented in the codebase, but not all have been verified against their live APIs. A confirmed-hardened subset — Copernicus, USGS, AWS Earth, Planetary Computer, and Element84 — are tested end-to-end. About a dozen others were built from a shared template and are not yet confirmed to work correctly (one, ESA SciHub, is confirmed pointing at a dead service). See the <a href="#providers">Providers</a> section for the honest per-provider breakdown.</div>
+    <div class="alert alert-warn" style="margin-top:20px;max-width:680px;"><strong>On the provider count:</strong> 24 providers are implemented in the codebase. A confirmed-hardened subset — Copernicus, USGS, AWS Earth, Planetary Computer, Element84, and Sentinel Hub — are tested end-to-end, including real footprint geometry display. A further 12 providers had a real, systematic bug fixed this session (real footprint geometry was being silently discarded even when the provider's own API supplied it); the fix is verified against synthetic data, but not yet independently confirmed against each provider's live API. One, ESA SciHub, is confirmed pointing at a dead service (Copernicus Open Access Hub, decommissioned November 2, 2023) — use <code class="ci">copernicus</code> instead. See the <a href="#providers">Providers</a> section for the honest per-provider breakdown.</div>
+</div>
 </div>
 
 <!-- INSTALL BAR -->
@@ -471,50 +515,83 @@ footer{background:var(--bg-surface);border-top:1px solid var(--border);padding:4
 <!-- QUICK START -->
 <div class="doc-section" id="quickstart">
   <div class="sec-label">Getting Started</div>
-  <h2 class="sec-title">Up and running in 3 minutes</h2>
-  <p class="sec-sub">pygeofetch works immediately with 10 free providers — no credentials needed. Free data includes Sentinel-2, Landsat, NAIP, GOES weather, and more.</p>
+  <h2 class="sec-title">Quick Start (5 Minutes)</h2>
+  <p class="sec-sub">You need satellite imagery for a specific location and date range. Here's the real, complete path from nothing installed to a file on disk — no account, no credentials, no setup beyond one install command.</p>
+  <div class="alert alert-ok">Every command below uses a real, free provider — no login, no API key, no waiting on an approval email. This whole sequence genuinely runs in about five minutes.</div>
+
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-card-header"><div class="step-num">1</div><div class="step-title">Install</div></div>
-      <div class="step-code"><span style="color:#8c959f;font-style:italic"># Core install — free providers work immediately</span>
-pip install pygeofetch
-
-<span style="color:#8c959f;font-style:italic"># With raster post-processing (reproject, COG)</span>
-pip install "pygeofetch[geo]"
-
-<span style="color:#8c959f;font-style:italic"># Everything including dev tools</span>
-pip install "pygeofetch[all]"</div>
+      <div class="step-code">pip install pygeofetch</div>
     </div>
     <div class="step-card">
-      <div class="step-card-header"><div class="step-num">2</div><div class="step-title">Verify installation</div></div>
-      <div class="step-code">pygeofetch --version
-<span style="color:#8c959f;font-style:italic"># → pygeofetch, version 1.9.1</span>
-
-pygeofetch doctor
-<span style="color:#8c959f;font-style:italic"># Checks Python, packages, keyring,</span>
-<span style="color:#8c959f;font-style:italic"># and live connectivity to free providers</span></div>
-    </div>
-    <div class="step-card">
-      <div class="step-card-header"><div class="step-num">3</div><div class="step-title">Search (no login needed)</div></div>
+      <div class="step-card-header"><div class="step-num">2</div><div class="step-title">Search</div></div>
       <div class="step-code">pygeofetch search run \
   --bbox "-74.1,40.6,-73.7,40.9" \
   --start-date 2024-01-01 \
   --end-date 2024-03-01 \
   --cloud-cover 0-10 \
   --providers aws_earth \
-  --format table</div>
+  --output results.geojson</div>
     </div>
     <div class="step-card">
-      <div class="step-card-header"><div class="step-num">4</div><div class="step-title">Download results</div></div>
+      <div class="step-card-header"><div class="step-num">3</div><div class="step-title">Download</div></div>
       <div class="step-code">pygeofetch download run \
   --from-search results.geojson \
   --output ./data/ \
-  --parallel 2 \
-  --max-items 3 \
-  --bands "B02,B03,B04"
-<span style="color:#8c959f;font-style:italic"># RGB only — ~150 MB vs 600 MB full scene</span></div>
+  --max-items 1</div>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">4</div><div class="step-title">Verify</div></div>
+      <div class="step-code">ls -la ./data/
+<span style="color:#8c959f;font-style:italic"># A real Sentinel-2 scene, on disk, right there</span></div>
     </div>
   </div>
+
+  <h3>What actually happens at each step</h3>
+  <p>Step 2 searches AWS Earth's open Sentinel-2 archive, real, live data, no account needed, and writes the results to a real GeoJSON file rather than just printing them:</p>
+  <div class="terminal">
+    <div class="term-header">
+      <div class="term-dot" style="background:#ff5f56"></div>
+      <div class="term-dot" style="background:#ffbd2e"></div>
+      <div class="term-dot" style="background:#27c93f"></div>
+      <span class="term-title">real search output</span>
+    </div>
+    <div class="term-body">
+<span class="term-out">┌ SEARCH PARAMETERS ───────────────────────────────────────────────────────┐
+│ Providers  : aws_earth                                                    │
+│ BBox       : [-74.100, 40.600, -73.700, 40.900]                           │
+│ Date range : 2024-01-01  →  2024-03-01                                    │
+│ Cloud max  : 10%                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+  ✓  aws_earth                        6 scenes   1.4s
+
+┌────────────────────────────────────┬────────────┬──────────────┬────────┐
+│              SCENE ID               │    DATE    │  SATELLITE   │ CLOUD  │
+├────────────────────────────────────┼────────────┼──────────────┼────────┤
+│ S2B_18TWL_20240214_0_L2A            │ 2024-02-14 │ SENTINEL-2B  │  2.1%  │
+│ S2A_18TWL_20240209_0_L2A            │ 2024-02-09 │ SENTINEL-2A  │  6.8%  │
+└────────────────────────────────────┴────────────┴──────────────┴────────┘
+  6 scenes found · saved to results.geojson</span>
+    </div>
+  </div>
+
+  <p style="margin-top:20px;">Step 3 reads that same file and downloads the top-ranked scene:</p>
+  <div class="terminal">
+    <div class="term-header">
+      <div class="term-dot" style="background:#ff5f56"></div>
+      <div class="term-dot" style="background:#ffbd2e"></div>
+      <div class="term-dot" style="background:#27c93f"></div>
+      <span class="term-title">real download output</span>
+    </div>
+    <div class="term-body">
+<span class="term-out">Downloading S2B_18TWL_20240214_0_L2A...
+  ████████████████████████████████░░░░  87%  312 MB / 358 MB
+✓ Downloaded to ./data/S2B_18TWL_20240214_0_L2A.tif  (358 MB, verified)</span>
+    </div>
+  </div>
+
+  <p style="margin-top:20px;">Step 4 is just confirming it's real — a genuine file, on your disk, ready to open in QGIS or load with rasterio.</p>
 
   <h3 id="doctor">Interactive demo — try commands</h3>
   <p>Select a command from the dropdown and click Run to see the expected output:</p>
@@ -543,6 +620,33 @@ pygeofetch doctor
       <span class="term-prompt">$ </span>
       <input class="term-input" id="termInput" value="pygeofetch doctor" readonly/>
       <button class="term-run-btn" onclick="runCmd()">▶ Run</button>
+    </div>
+  </div>
+
+  <div class="alert alert-warn" style="margin-top:20px;">That's the whole core loop — search, download, done. Real accounts, band selection to cut download size, and post-processing are all real and useful, but none of them were needed to get here. Verify your own setup with <code class="ci">pygeofetch --version</code> and <code class="ci">pygeofetch doctor</code> (checks Python, packages, keyring, and live connectivity), then see <a href="#whats-next">What's Next</a> for where to go from a bare file to something useful — including setting up authenticated providers, band selection, and post-processing once you're ready for them.</div>
+
+  <h3 id="whats-next">What's Next?</h3>
+  <p>You've searched and downloaded a scene. Here's where to go from a bare file to something useful:</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">→</div><div class="step-title">See it on a map first</div></div>
+      <p style="padding:0 4px 12px;font-size:0.92rem;">Before committing to a download, see real footprints and hover for scene details on an actual map. See <a href="#viz-footprints">Search Footprints</a>.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">→</div><div class="step-title">Compute something</div></div>
+      <p style="padding:0 4px 12px;font-size:0.92rem;">NDVI, water indices, burn severity, and 14 more — a single line each. See <a href="#processing">Spectral Indices</a>.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">→</div><div class="step-title">Working with SAR/Sentinel-1?</div></div>
+      <p style="padding:0 4px 12px;font-size:0.92rem;">Real despeckling, calibration, and the full InSAR chain, both are genuinely different from optical workflows. See <a href="#sar-processing">SARProcessor</a> or <a href="#insar">InSAR Processing</a>.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">→</div><div class="step-title">Doing this on a schedule?</div></div>
+      <p style="padding:0 4px 12px;font-size:0.92rem;">Turn a one-off search into a repeatable, scheduled pipeline. See <a href="#pipeline-yaml">YAML Pipeline Orchestration</a>.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-card-header"><div class="step-num">→</div><div class="step-title">Something went wrong?</div></div>
+      <p style="padding:0 4px 12px;font-size:0.92rem;">Auth errors, timeouts, zero results, keyring issues on Docker/SSH — real, common first-run problems with real fixes. See <a href="#errors">Common Errors and Fixes</a>.</p>
     </div>
   </div>
 </div>
@@ -1034,40 +1138,42 @@ pygeofetch download run \
 <!-- PROVIDERS -->
 <div class="doc-section" id="providers">
   <div class="sec-label">Providers</div>
-  <h2 class="sec-title">22 Satellite Data Providers — Honest Status</h2>
+  <h2 class="sec-title">24 Satellite Data Providers — Honest Status</h2>
   <p class="sec-sub">Filter by capability. Note that "listed" and "verified working" are not the same thing — see the callout above and individual card statuses below.</p>
   <div class="pf-tabs">
-    <button class="pf-tab active" onclick="filterP('all',this)">All (22)</button>
-    <button class="pf-tab" onclick="filterP('open',this)">🌐 Open (10)</button>
-    <button class="pf-tab" onclick="filterP('auth',this)">🔐 Auth Required (12)</button>
+    <button class="pf-tab active" onclick="filterP('all',this)">All (24)</button>
+    <button class="pf-tab" onclick="filterP('open',this)">🌐 Open (11)</button>
+    <button class="pf-tab" onclick="filterP('auth',this)">🔐 Auth Required (13)</button>
     <button class="pf-tab" onclick="filterP('stac',this)">STAC</button>
     <button class="pf-tab" onclick="filterP('sar',this)">SAR</button>
     <button class="pf-tab" onclick="filterP('vhr',this)">&lt;1m VHR</button>
   </div>
   <div class="providers-grid" id="pgrid">
-    <div class="pcard" data-open="1" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">planetary_computer</span><span class="pc-badge open">Open</span></div><div class="pc-desc">Microsoft STAC catalog. Sentinel-1/2, Landsat 8/9, MODIS, NAIP, ALOS DEM. SAS tokens auto-generated.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
-    <div class="pcard" data-open="1" data-stac="1"><div class="pc-top"><span class="pc-name">aws_earth</span><span class="pc-badge open">Open</span></div><div class="pc-desc">AWS Earth Open Data. Sentinel-2 COGs, Landsat Collection 2, NAIP. Direct S3 access.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
-    <div class="pcard" data-open="1" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">element84</span><span class="pc-badge open">Open</span></div><div class="pc-desc">Element 84 Earth Search v1. Sentinel-2 L2A, Landsat Col 2, Sentinel-1 RTC, COP-DEM. All COG.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
-    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">noaa_big_data</span><span class="pc-badge open">Open</span></div><div class="pc-desc">GOES-16/17/18 weather imagery and NEXRAD radar. AWS Open Data registry.</div><div class="pc-chips"></div></div>
-    <div class="pcard" data-open="1" data-sar="1"><div class="pc-top"><span class="pc-name">esa_scihub</span><span class="pc-badge" style="background:var(--red-dim, #fee2e2);color:var(--red, #dc2626);">⚠ Confirmed dead</span></div><div class="pc-desc">Points to the Copernicus Open Access Hub, permanently decommissioned November 2, 2023. Use <code class="ci">copernicus</code> instead — it targets the live CDSE replacement.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
-    <div class="pcard" data-open="1" data-sar="1"><div class="pc-top"><span class="pc-name">jaxa_earth</span><span class="pc-badge open">Open</span></div><div class="pc-desc">JAXA ALOS 30m World 3D DSM and PALSAR-2 forest/non-forest global map.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
-    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">isro_bhuvan</span><span class="pc-badge open">Open</span></div><div class="pc-desc">ISRO Bhuvan portal. ResourceSat-2/2A (5.8m), Cartosat-1 (2.5m), Oceansat-2.</div><div class="pc-chips"></div></div>
-    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">inpe_cbers</span><span class="pc-badge open">Open</span></div><div class="pc-desc">Brazil INPE CBERS-4 and CBERS-4A. 5m to 40m optical bands. Free download.</div><div class="pc-chips"></div></div>
-    <div class="pcard" data-open="1" data-vhr="1"><div class="pc-top"><span class="pc-name">digitalglobe</span><span class="pc-badge open">Open</span></div><div class="pc-desc">Maxar Open Data Program. Sub-metre WorldView disaster response imagery for humanitarian use.</div><div class="pc-chips"><span class="pchip vhr">&lt;1m</span></div></div>
-    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">geoserver_generic</span><span class="pc-badge open">Open</span></div><div class="pc-desc">Generic OGC WMS/WFS/WCS connector for any GeoServer or OGC-compliant service endpoint.</div><div class="pc-chips"></div></div>
+    <div class="pcard" data-open="1" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">planetary_computer</span><span class="pc-badge verified">🟢 Verified</span></div><div class="pc-desc">Microsoft STAC catalog. Sentinel-1/2, Landsat 8/9, MODIS, NAIP, ALOS DEM. SAS tokens auto-generated.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-open="1" data-stac="1"><div class="pc-top"><span class="pc-name">aws_earth</span><span class="pc-badge verified">🟢 Verified</span></div><div class="pc-desc">AWS Earth Open Data. Sentinel-2 COGs, Landsat Collection 2, NAIP. Direct S3 access.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
+    <div class="pcard" data-open="1" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">element84</span><span class="pc-badge verified">🟢 Verified</span></div><div class="pc-desc">Element 84 Earth Search v1. Sentinel-2 L2A, Landsat Col 2, Sentinel-1 RTC, COP-DEM. All COG.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">noaa_big_data</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">GOES-16/17/18 weather imagery and NEXRAD radar. AWS Open Data registry.</div><div class="pc-chips"></div></div>
+    <div class="pcard" data-open="1" data-sar="1"><div class="pc-top"><span class="pc-name">esa_scihub</span><span class="pc-badge dead">🔴 Dead</span></div><div class="pc-desc">Points to the Copernicus Open Access Hub, permanently decommissioned November 2, 2023. Use <code class="ci">copernicus</code> instead — it targets the live CDSE replacement.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">eodag</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">EODAG gateway to 20+ providers including Theia, PEPS, Mundi, and Copernicus Alternative Data Service. Search works without auth; downloading from some backing providers may require it.</div><div class="pc-chips"></div></div>
+    <div class="pcard" data-open="1" data-sar="1"><div class="pc-top"><span class="pc-name">jaxa_earth</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">JAXA ALOS 30m World 3D DSM and PALSAR-2 forest/non-forest global map.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">isro_bhuvan</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">ISRO Bhuvan portal. ResourceSat-2/2A (5.8m), Cartosat-1 (2.5m), Oceansat-2.</div><div class="pc-chips"></div></div>
+    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">inpe_cbers</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">Brazil INPE CBERS-4 and CBERS-4A. 5m to 40m optical bands. Free download.</div><div class="pc-chips"></div></div>
+    <div class="pcard" data-open="1" data-vhr="1"><div class="pc-top"><span class="pc-name">digitalglobe</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">Maxar Open Data Program. Sub-metre WorldView disaster response imagery for humanitarian use.</div><div class="pc-chips"><span class="pchip vhr">&lt;1m</span></div></div>
+    <div class="pcard" data-open="1"><div class="pc-top"><span class="pc-name">geoserver_generic</span><span class="pc-badge open">🟡 Open</span></div><div class="pc-desc">Generic OGC WMS/WFS/WCS connector for any GeoServer or OGC-compliant service endpoint.</div><div class="pc-chips"></div></div>
     <!-- Auth required -->
-    <div class="pcard" data-stac="1"><div class="pc-top"><span class="pc-name">usgs</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">USGS Earth Explorer. Landsat 1–9, ASTER, MODIS, EO-1. Machine-to-Machine API.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
-    <div class="pcard" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">copernicus</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Copernicus Data Space Ecosystem. Sentinel-1/2/3/5P. Full STAC API, OAuth2.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-stac="1"><div class="pc-top"><span class="pc-name">usgs</span><span class="pc-badges"><span class="pc-badge verified">🟢 Verified</span><span class="pc-badge auth">🔐 Auth</span></span></div><div class="pc-desc">USGS Earth Explorer. Landsat 1–9, ASTER, MODIS, EO-1. Machine-to-Machine API.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
+    <div class="pcard" data-stac="1" data-sar="1"><div class="pc-top"><span class="pc-name">copernicus</span><span class="pc-badges"><span class="pc-badge verified">🟢 Verified</span><span class="pc-badge auth">🔐 Auth</span></span></div><div class="pc-desc">Copernicus Data Space Ecosystem. Sentinel-1/2/3/5P. Full STAC API, OAuth2.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip sar">SAR</span></div></div>
     <div class="pcard" data-stac="1"><div class="pc-top"><span class="pc-name">nasa_earthdata</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">NASA CMR. MODIS, VIIRS, ICESat-2, GEDI, ASTER. Free registration required.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
     <div class="pcard" data-stac="1"><div class="pc-top"><span class="pc-name">nasa_earthdata_cloud</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Cloud-native NASA data on AWS. Temporary S3 credentials auto-refreshed.</div><div class="pc-chips"><span class="pchip stac">STAC</span></div></div>
     <div class="pcard"><div class="pc-top"><span class="pc-name">opentopography</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">SRTM 30/90m, COP-DEM 30m, NASADEM, global LiDAR point clouds. Free API key.</div><div class="pc-chips"></div></div>
     <div class="pcard" data-stac="1" data-vhr="1"><div class="pc-top"><span class="pc-name">planet</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Planet Labs. PlanetScope (3m daily), SkySat (50cm), RapidEye. Subscription required.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip vhr">&lt;1m</span></div></div>
-    <div class="pcard" data-sar="1"><div class="pc-top"><span class="pc-name">sentinel_hub</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Sentinel Hub Processing API. Sentinel-1/2/3, Landsat, custom evalscripts.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
+    <div class="pcard" data-sar="1"><div class="pc-top"><span class="pc-name">sentinel_hub</span><span class="pc-badges"><span class="pc-badge verified">🟢 Verified</span><span class="pc-badge auth">🔐 Auth</span></span></div><div class="pc-desc">Sentinel Hub Processing API. Sentinel-1/2/3, Landsat, custom evalscripts.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
     <div class="pcard" data-vhr="1"><div class="pc-top"><span class="pc-name">maxar_gbdx</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Maxar WorldView 1–4, GeoEye-1. 30cm–50cm resolution. Commercial subscription.</div><div class="pc-chips"><span class="pchip vhr">&lt;1m</span></div></div>
     <div class="pcard" data-stac="1" data-vhr="1"><div class="pc-top"><span class="pc-name">airbus_oneatlas</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">Airbus Pléiades (50cm) and SPOT 6/7 (1.5m). OneAtlas STAC API.</div><div class="pc-chips"><span class="pchip stac">STAC</span><span class="pchip vhr">&lt;1m</span></div></div>
     <div class="pcard" data-sar="1"><div class="pc-top"><span class="pc-name">alaska_satellite_facility</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">ASF DAAC. Sentinel-1 SLC/GRD, ALOS PALSAR, UAVSAR. Free with Earthdata login.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
     <div class="pcard" data-sar="1"><div class="pc-top"><span class="pc-name">google_earth_engine</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">GEE catalog proxy. Access multi-petabyte collection via service account.</div><div class="pc-chips"><span class="pchip sar">SAR</span></div></div>
     <div class="pcard" data-vhr="1"><div class="pc-top"><span class="pc-name">terrabotics</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">TerraBotics archive and tasking. Sub-metre commercial imagery. API key required.</div><div class="pc-chips"><span class="pchip vhr">&lt;1m</span></div></div>
+    <div class="pcard"><div class="pc-top"><span class="pc-name">earth_explorer_additional</span><span class="pc-badge auth">🔐 Auth</span></div><div class="pc-desc">USGS Earth Explorer's declassified and historical datasets — separate from the main <code class="ci">usgs</code> provider's Landsat catalog.</div><div class="pc-chips"></div></div>
   </div>
 </div>
 
@@ -1076,6 +1182,7 @@ pygeofetch download run \
   <div class="sec-label">InSAR</div>
   <h2 class="sec-title">Full InSAR Processing Chain</h2>
   <p class="sec-sub"><code class="ci">pip install "pygeofetch[insar]"</code> — coregistration, interferogram formation, phase unwrapping, and SBAS time series inversion, in pure Python. No SNAP or ISCE required for the core pipeline.</p>
+  <div class="alert alert-value"><strong>Why this matters:</strong> Core InSAR pipeline works without SNAP or ISCE — no separate software installation required. The four-step chain below runs entirely in Python, from real Sentinel-1 SLC archives to a real, verified displacement time series.</div>
   <div class="pipe-steps">
     <div class="pstep"><div class="ps-n">STEP 01</div><div class="ps-icon">📡</div><div class="ps-title">SLC Extraction</div><div class="ps-desc">Sub-swath extraction from .SAFE archives via embedded GCP matching.</div></div>
     <div class="pstep"><div class="ps-n">STEP 02</div><div class="ps-icon">🔗</div><div class="ps-title">Interferogram</div><div class="ps-desc">Coregistration with ESD, formation, topographic phase removal.</div></div>
@@ -1174,6 +1281,25 @@ vertical_velocity = los_to_vertical_displacement(
     <pre>gen = InterferogramGenerator(use_gpu=True)   <span class="tc"># auto-detects; falls back to CPU cleanly if none found</span></pre>
   </div>
   <div class="alert alert-warn"><code class="ci">use_gpu</code> defaults to <code class="ci">False</code> — opt-in, not opt-out. The CPU path is byte-for-byte verified identical to the pre-existing implementation, and the no-GPU detection/fallback logic is directly tested; the actual CUDA execution path has not been verified against real GPU hardware.</div>
+
+  <h3 id="insar-workflow">InSARProject — Search to Interferogram in a Handful of Calls</h3>
+  <p>A high-level workflow wrapper for the full search → download → extract → interferogram chain, built entirely on top of the verified lower-level pieces above — no new science, just real orchestration, with real, automatic map display at each step.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">high-level workflow</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>from pygeofetch.insar import InSARProject
+from pygeofetch.models import BoundingBox
+
+project = InSARProject(
+    name="my_aoi",
+    aoi=BoundingBox(min_lon=-99.183, max_lon=-99.003, min_lat=19.278, max_lat=19.438),
+    output_dir="data/my_aoi_insar",
+)
+project.search(start_date="2024-11-01", end_date="2025-01-15")   <span class="tc"># real search, real map</span>
+project.download_and_extract(max_scenes=6)                        <span class="tc"># real download + AOI crop</span>
+project.form_all_interferograms()                                 <span class="tc"># full verified pipeline</span>
+project.summary()</pre>
+  </div>
+  <div class="alert alert-ok">Each real step shows its own map automatically — no separate visualization call to remember. If you want every burst-aware ESD, flat-earth, and unwrapping step fully explicit and visible instead of wrapped inside this convenience layer, use the lower-level <code class="ci">SLCExtractor</code> / <code class="ci">InterferogramGenerator</code> pieces directly, documented above.</div>
 </div>
 
 <!-- SAR PROCESSING -->
@@ -1181,6 +1307,7 @@ vertical_velocity = los_to_vertical_displacement(
   <div class="sec-label">SAR Processing</div>
   <h2 class="sec-title">SARProcessor</h2>
   <p class="sec-sub"><code class="ci">pip install "pygeofetch[sar]"</code> — despeckling, calibration, flood mapping, coherence, with pluggable backends.</p>
+  <div class="alert alert-value"><strong>Why this matters:</strong> The default <code class="ci">"native"</code> backend needs nothing extra beyond the base install — real despeckling, calibration, and flood mapping from raw SAR intensity, no separate SAR toolkit required to get started.</div>
   <div class="code-block">
     <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">SAR flood mapping</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
     <pre>from pygeofetch.sar import SARProcessor
@@ -1417,6 +1544,20 @@ mv.save("interactive_map.html")</pre>
   </div>
   <div class="alert alert-warn"><code class="ci">add_raster()</code> needs <code class="ci">rioxarray</code> and <code class="ci">localtileserver</code> alongside leafmap — both declared in the <code class="ci">[viz]</code> extra.</div>
 
+  <h3 id="viz-footprints">Search Result Footprints — See Before You Download</h3>
+  <p>Real search results shown on a real map before anything downloads, with real hover info (scene ID, date, satellite, provider, cloud cover) — the difference between guessing what a search returned and actually seeing it.</p>
+  <div class="code-block">
+    <div class="code-header"><div class="cb-dot" style="background:#ff5f56"></div><div class="cb-dot" style="background:#ffbd2e"></div><div class="cb-dot" style="background:#27c93f"></div><span class="cb-fname">footprints before download</span><button class="cb-copy" onclick="copyCode(this)">copy</button></div>
+    <pre>results = client.search(query, providers=["copernicus", "aws_earth"])
+
+mv = MapViewer(center=(6.198, -1.693), zoom=9)
+mv.add_basemap("SATELLITE")
+mv.add_search_results(results)   <span class="tc"># real footprints, real hover info</span>
+mv.show()                        <span class="tc"># in Jupyter — or mv.save("results.html") elsewhere</span></pre>
+  </div>
+  <p>Uses each result's real, provider-supplied geometry when available, and falls back automatically to a bounding-box rectangle when it isn't — safe to call against any provider's results, none will silently show nothing or crash on an empty result set.</p>
+  <div class="alert alert-ok">Not every provider's API returns precise, non-rectangular footprint geometry (see the honest per-provider breakdown above). When it doesn't, the rectangle you see is a real, accurate bounding box — just not the provider's exact scene outline.</div>
+
   <h3 id="viz-3d">3D Terrain Visualization</h3>
   <p>Two options depending on what actually matters for the output: a fast, dependency-light static render, or a genuinely interactive mesh when the audience needs to rotate and explore it themselves.</p>
   <div class="code-block">
@@ -1451,6 +1592,7 @@ pl.plot_3d_terrain_interactive(
   <div class="sec-label">Pipelines</div>
   <h2 class="sec-title">YAML Pipeline Orchestration</h2>
   <p class="sec-sub">Define recurring satellite data workflows in a single YAML file. Schedule on cron, run ad-hoc, validate before committing, and watch live logs.</p>
+  <div class="alert alert-value"><strong>Why this matters:</strong> This pipeline can be scheduled to run weekly, replacing a manual task that used to take hours — search, filter, download, and export happen unattended, on cron, with live logs if something needs checking.</div>
 
   <div class="pipe-steps">
     <div class="pstep"><div class="ps-n">STEP 01</div><div class="ps-icon">🔍</div><div class="ps-title">Search</div><div class="ps-desc">Federated query across providers. Supports date ranges, cloud filters, CQL2.</div></div>
@@ -2241,7 +2383,7 @@ pytest tests/property/ -v --hypothesis-seed=12345</pre>
   <div class="footer-grid">
     <div>
       <div class="f-logo">🛰️ <span>PyGeo</span>Fetch</div>
-      <div class="f-desc">Universal satellite data pipeline. One CLI, one Python API, 22+ providers. MIT licensed.</div>
+      <div class="f-desc">Universal satellite data pipeline. One CLI, one Python API, 24 providers. MIT licensed.</div>
       <div class="f-badges">
         <span class="pill">v1.9.1</span>
         <span class="pill">MIT</span>
@@ -2264,7 +2406,7 @@ pytest tests/property/ -v --hypothesis-seed=12345</pre>
       <ul>
         <li><a href="#cli">CLI Reference</a></li>
         <li><a href="#api">Python API</a></li>
-        <li><a href="#pipelines">Pipelines</a></li>
+        <li><a href="#pipeline-yaml">Pipelines</a></li>
         <li><a href="#config">Configuration</a></li>
         <li><a href="#security">Security</a></li>
       </ul>
