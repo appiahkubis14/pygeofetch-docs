@@ -1555,6 +1555,9 @@ mv.add_basemap("SATELLITE")
 mv.add_search_results(results)   <span class="tc"># real footprints, real hover info</span>
 mv.show()                        <span class="tc"># in Jupyter — or mv.save("results.html") elsewhere</span></pre>
   </div>
+  <p align="center">
+  <img src="https://raw.githubusercontent.com/EOCoreINT/pygeofetch/main/docs/images/search.png" width="100%" />
+</p>
   <p>Uses each result's real, provider-supplied geometry when available, and falls back automatically to a bounding-box rectangle when it isn't — safe to call against any provider's results, none will silently show nothing or crash on an empty result set.</p>
   <div class="alert alert-ok">Not every provider's API returns precise, non-rectangular footprint geometry (see the honest per-provider breakdown above). When it doesn't, the rectangle you see is a real, accurate bounding box — just not the provider's exact scene outline.</div>
 
